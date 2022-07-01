@@ -1,13 +1,15 @@
-/**
- * Initial resume class
- */
+package model;
+
 public class Resume {
 
     // Unique identifier
-    String uuid;
+    public String uuid;
+    public String education;
+    public int age;
 
     @Override
     public String toString() {
         return uuid;
     }
+
 }

@@ -1,9 +1,14 @@
-package model;
+package main.model;
 
-public class Resume implements Comparable<Resume>{
+public class Resume implements Comparable<Resume> {
+    private String uuid;
 
-    // Unique identifier
-    public String uuid;
+    public Resume() {
+    }
+
+    public Resume(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getUuid() {
         return uuid;

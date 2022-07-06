@@ -1,6 +1,8 @@
-import model.Resume;
-import storage.ArrayStorage;
-import storage.Storage;
+package test;
+
+import main.model.Resume;
+import main.storage.ArrayStorage;
+import main.storage.Storage;
 
 import java.io.BufferedReader;
 import java.io.IOException;

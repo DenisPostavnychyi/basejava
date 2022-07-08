@@ -10,7 +10,7 @@ import java.util.Arrays;
 /**
  * Array based main.storage for Resumes
  */
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage implements Storage {
     public static final int STORAGE_LIMIT = 10000;
 
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -27,6 +27,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
             throw new NotExistStorageException(resume.getUuid());
         } else {
             storage[index] = resume;
+            System.out.println("Resume successfully updated");
         }
     }
 

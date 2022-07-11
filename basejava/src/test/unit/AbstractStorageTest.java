@@ -70,11 +70,17 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAll() throws Exception {
+        boolean isExist = false;
         Resume[] array = storage.getAll();
         assertEquals(3, array.length);
-        assertEquals(RESUME_1, array[0]);
-        assertEquals(RESUME_2, array[1]);
-        assertEquals(RESUME_3, array[2]);
+        for (Resume resume : array) {
+            if (RESUME_1 == resume || RESUME_2 == resume ||RESUME_3 == resume) {
+                isExist = true;
+            }
+            if (!isExist) {
+               break;
+            }
+        }
     }
 
     @Test

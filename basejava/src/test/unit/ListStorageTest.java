@@ -1,6 +1,7 @@
 package test.unit;
 
 import main.storage.ListStorage;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ListStorageTest extends AbstractStorageTest {
@@ -9,8 +10,7 @@ public class ListStorageTest extends AbstractStorageTest {
         super(new ListStorage());
     }
 
+    @Ignore
     @Test
-    public void saveOverflow(){
-        System.out.println("You need 2,147,483,648+ resumes to overflow ListStorage!");
-    }
+    public void saveOverflow(){}
 }

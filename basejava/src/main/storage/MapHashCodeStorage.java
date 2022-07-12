@@ -4,11 +4,14 @@ import main.exception.ExistStorageException;
 import main.exception.NotExistStorageException;
 import main.model.Resume;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class MapStorage extends AbstractStorage{
-    private Map<String, Resume> map = new HashMap<>();
+public class MapHashCodeStorage extends AbstractStorage {
+    private Map<Integer, Resume> map = new HashMap<>();
+
     @Override
     protected int getIndex(String uuid) {
         return 0;
@@ -16,10 +19,10 @@ public class MapStorage extends AbstractStorage{
 
     @Override
     public void update(Resume resume) {
-        if (!map.containsValue(resume)) {
+        if (!map.containsKey(resume.getUuid().hashCode())) {
             throw new NotExistStorageException(resume.getUuid());
         } else {
-            map.replace(resume.getUuid(),resume);
+            map.replace(resume.getUuid().hashCode(), resume);
         }
     }
 
@@ -35,30 +38,30 @@ public class MapStorage extends AbstractStorage{
 
     @Override
     public void save(Resume resume) {
-        if (map.containsValue(resume)) {
+        if (map.containsKey(resume.getUuid().hashCode())) {
             throw new ExistStorageException(resume.getUuid());
         }
-        map.put(resume.getUuid(), resume);
+        map.put(resume.getUuid().hashCode(), resume);
     }
 
     @Override
     public Resume get(String uuid) {
-        if (!map.containsKey(uuid)) {
+        if (!map.containsKey(uuid.hashCode())) {
             throw new NotExistStorageException(uuid);
         }
-        return map.get(uuid);
+        return map.get(uuid.hashCode());
     }
 
     @Override
     public void delete(String uuid) {
-        if (!map.containsKey(uuid)) {
+        if (!map.containsKey(uuid.hashCode())) {
             throw new NotExistStorageException(uuid);
         }
-        map.remove(uuid);
+        map.remove(uuid.hashCode());
     }
 
     @Override
-    public Resume[] getAll() {
-        return map.values().toArray(new Resume[map.size()]);
+    public List<Resume> copyAll() {
+        return new ArrayList<>(map.values());
     }
 }

@@ -1,11 +1,23 @@
 package main.storage;
 
+import main.exception.ExistStorageException;
+import main.exception.StorageException;
 import main.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
     @Override
-    protected void insertElement(Resume resume) {
-        storage[size] = resume;
+    public void save(Resume resume) {
+        if (size >= STORAGE_LIMIT) {
+            throw new StorageException("Storage overflow");
+        }
+
+        int index = getIndex(resume.getUuid());
+        if (index > -1) {
+            throw new ExistStorageException(resume.getUuid());
+        } else {
+            storage[size] = resume;
+            size++;
+        }
     }
     @Override
     protected int getIndex(String uuid) {

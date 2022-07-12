@@ -5,65 +5,63 @@ import main.exception.NotExistStorageException;
 import main.model.Resume;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class ListStorage extends AbstractStorage{
-    private List<Resume> list = new ArrayList<>();
+public class MapUuidStorage extends AbstractStorage {
+    private Map<String, Resume> map = new HashMap<>();
 
     @Override
     protected int getIndex(String uuid) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getUuid().equals(uuid)) {
-                return i;
-            }
-        }
-        return -1;
+        return 0;
     }
 
     @Override
     public void update(Resume resume) {
-        list.set(getIndex(resume.getUuid()), resume);
+        if (!map.containsKey(resume.getUuid())) {
+            throw new NotExistStorageException(resume.getUuid());
+        } else {
+            map.replace(resume.getUuid(), resume);
+        }
     }
 
     @Override
     public void clear() {
-        list.clear();
+        map.clear();
     }
 
     @Override
     public int size() {
-        return list.size();
+        return map.size();
     }
 
     @Override
     public void save(Resume resume) {
-        int index = getIndex(resume.getUuid());
-        if (index > -1) {
+        if (map.containsKey(resume.getUuid())) {
             throw new ExistStorageException(resume.getUuid());
         }
-        list.add(resume);
+        map.put(resume.getUuid(), resume);
     }
 
     @Override
     public Resume get(String uuid) {
-        int index = getIndex(uuid);
-        if (index == -1) {
+        if (!map.containsKey(uuid)) {
             throw new NotExistStorageException(uuid);
         }
-        return list.get(getIndex(uuid));
+        return map.get(uuid);
     }
 
     @Override
     public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index < 0) {
+        if (!map.containsKey(uuid)) {
             throw new NotExistStorageException(uuid);
         }
-        list.remove(getIndex(uuid));
+        map.remove(uuid);
     }
 
     @Override
     public List<Resume> copyAll() {
-        return list;
+        return new ArrayList<>(map.values());
     }
 }

@@ -1,21 +1,26 @@
 package main.model;
 
-public class Resume implements Comparable<Resume> {
-    private String uuid;
+import java.util.Objects;
 
-    public Resume() {
-    }
+public class Resume implements Comparable<Resume> {
+    private final String uuid;
+    private String fullName;
 
     public Resume(String uuid) {
         this.uuid = uuid;
+    }
+
+    public Resume(String uuid, String fullName) {
+        this.uuid = Objects.requireNonNull(uuid, "uuid must not be null");
+        this.fullName = Objects.requireNonNull(fullName, "fullName must not be null");
     }
 
     public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public String getFullName() {
+        return fullName;
     }
 
     @Override
@@ -35,11 +40,12 @@ public class Resume implements Comparable<Resume> {
 
     @Override
     public String toString() {
-        return uuid;
+        return uuid + " " + fullName;
     }
 
     @Override
     public int compareTo(Resume o) {
-        return uuid.compareTo(o.uuid);
+        int i = uuid.compareTo(o.uuid);
+        return i;
     }
 }

@@ -1,11 +1,10 @@
 package main.storage;
 
-import main.exception.ExistStorageException;
 import main.exception.NotExistStorageException;
-import main.exception.StorageException;
 import main.model.Resume;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Array based main.storage for Resumes
@@ -36,7 +35,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size = 0;
     }
 
-    @Override
+    /*@Override
     public void save(Resume resume) {
         if (size >= STORAGE_LIMIT) {
             throw new StorageException("Storage overflow");
@@ -50,7 +49,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
             size++;
         }
     }
-
+*/
     @Override
     public Resume get(String uuid) {
         int index = getIndex(uuid);
@@ -71,14 +70,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         storage[size] = null;
     }
 
-    /**
-     * @return array, contains only Resumes in main.storage (without null)
-     */
     @Override
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
+    public List<Resume> copyAll() {
+        return Arrays.asList(Arrays.copyOfRange(storage, 0, size));
     }
 
-    protected abstract void insertElement(Resume r);
+    public abstract void save(Resume resume);
     protected abstract int getIndex(String uuid);
 }

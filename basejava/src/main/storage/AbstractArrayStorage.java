@@ -35,21 +35,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         size = 0;
     }
 
-    /*@Override
-    public void save(Resume resume) {
-        if (size >= STORAGE_LIMIT) {
-            throw new StorageException("Storage overflow");
-        }
-
-        int index = getIndex(resume.getUuid());
-        if (index > -1) {
-            throw new ExistStorageException(resume.getUuid());
-        } else {
-            insertElement(resume);
-            size++;
-        }
-    }
-*/
     @Override
     public Resume get(String uuid) {
         int index = getIndex(uuid);

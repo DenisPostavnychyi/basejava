@@ -1,10 +1,15 @@
 package main.model;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Resume implements Comparable<Resume> {
     private final String uuid;
     private String fullName;
+
+    private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume(String uuid) {
         this.uuid = uuid;
@@ -19,10 +24,29 @@ public class Resume implements Comparable<Resume> {
         return uuid;
     }
 
+    public void setFullName(String fullName){
+        this.fullName = fullName;
+    }
+
     public String getFullName() {
         return fullName;
     }
 
+    public void setContacts(Map<ContactType, String> contacts) {
+        this.contacts = contacts;
+    }
+
+    public String getContacts(ContactType contactType){
+        return contacts.get(contactType);
+    }
+
+    public void setSections(Map<SectionType, Section> sections) {
+        this.sections = sections;
+    }
+
+    public Section getSections(SectionType sectionType){
+        return sections.get(sectionType);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -30,7 +54,8 @@ public class Resume implements Comparable<Resume> {
 
         Resume resume = (Resume) o;
 
-        return uuid.equals(resume.uuid);
+        if (!uuid.equals(resume.uuid)) return false;
+        return fullName.equals(resume.fullName);
     }
 
     @Override
@@ -45,7 +70,7 @@ public class Resume implements Comparable<Resume> {
 
     @Override
     public int compareTo(Resume o) {
-        int i = uuid.compareTo(o.uuid);
-        return i;
+        int cmp = fullName.compareTo(o.fullName);
+        return cmp != 0 ? cmp : uuid.compareTo(o.uuid);
     }
 }

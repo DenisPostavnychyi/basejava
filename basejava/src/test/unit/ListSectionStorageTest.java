@@ -4,9 +4,9 @@ import main.storage.ListStorage;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class ListStorageTest extends AbstractStorageTest {
+public class ListSectionStorageTest extends AbstractStorageTest {
 
-    public ListStorageTest() {
+    public ListSectionStorageTest() {
         super(new ListStorage());
     }
 

@@ -1,10 +1,11 @@
 package main.model;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Resume implements Comparable<Resume> {
+public class Resume implements Comparable<Resume>, Serializable {
     private final String uuid;
     private String fullName;
 
@@ -47,6 +48,7 @@ public class Resume implements Comparable<Resume> {
     public Section getSections(SectionType sectionType){
         return sections.get(sectionType);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

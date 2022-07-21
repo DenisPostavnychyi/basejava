@@ -3,7 +3,7 @@ package main.service;
 import main.model.ContactType;
 import main.model.SectionType;
 
-public class ResumeService {
+public class ResumePrint {
     public void print(main.model.Resume resume) {
         System.out.println("Uuid: " + resume.getUuid());
         System.out.println("Full name: " + resume.getFullName());

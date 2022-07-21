@@ -1,7 +1,5 @@
 package main.storage;
 
-import main.exception.ExistStorageException;
-import main.exception.NotExistStorageException;
 import main.model.Resume;
 
 import java.util.ArrayList;
@@ -9,21 +7,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapUuidStorage extends AbstractStorage {
+public class MapUuidStorage extends AbstractStorage<String> {
     private Map<String, Resume> map = new HashMap<>();
 
     @Override
-    protected int getIndex(String uuid) {
-        return 0;
+    protected boolean isExist(String uuid) {
+        return map.containsKey(uuid);
     }
 
     @Override
-    public void update(Resume resume) {
-        if (!map.containsKey(resume.getUuid())) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            map.replace(resume.getUuid(), resume);
-        }
+    protected String getSearchKey(String uuid) {
+        return uuid;
+    }
+
+    @Override
+    public void doUpdate(Resume resume, String uuid) {
+        map.replace(uuid, resume);
     }
 
     @Override
@@ -37,31 +36,22 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    public void save(Resume resume) {
-        if (map.containsKey(resume.getUuid())) {
-            throw new ExistStorageException(resume.getUuid());
-        }
-        map.put(resume.getUuid(), resume);
+    public void doSave(Resume resume, String uuid) {
+        map.put(uuid, resume);
     }
 
     @Override
-    public Resume get(String uuid) {
-        if (!map.containsKey(uuid)) {
-            throw new NotExistStorageException(uuid);
-        }
+    public Resume doGet(String uuid) {
         return map.get(uuid);
     }
 
     @Override
-    public void delete(String uuid) {
-        if (!map.containsKey(uuid)) {
-            throw new NotExistStorageException(uuid);
-        }
+    public void doDelete(String uuid) {
         map.remove(uuid);
     }
 
     @Override
-    public List<Resume> copyAll() {
+    public List<Resume> doCopyAll() {
         return new ArrayList<>(map.values());
     }
 }

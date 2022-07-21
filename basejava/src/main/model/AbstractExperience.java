@@ -1,19 +1,20 @@
 package main.model;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 
-public abstract class AbstractExperience{
-    public LocalDate startDate;
-    public LocalDate endDate;
-    public String title;
-    public String titleLink;
+public abstract class AbstractExperience extends OrganizationName{
+    public YearMonth startDate;
+    public YearMonth endDate;
+/*    public String title;
+    public String link;*/
     public String objective;
 
-    public AbstractExperience(LocalDate startDate, LocalDate endDate, String title, String titleLink, String objective) {
+    public AbstractExperience(YearMonth startDate, YearMonth endDate, String title, String link, String objective) {
+        super(title, link);
         this.startDate = startDate;
         this.endDate = endDate;
-        this.title = title;
-        this.titleLink = titleLink;
+/*        this.title = title;
+        this.link = link;*/
         this.objective = objective;
     }
 

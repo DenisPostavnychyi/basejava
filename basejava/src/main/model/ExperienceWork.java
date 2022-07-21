@@ -1,11 +1,11 @@
 package main.model;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 
 public class ExperienceWork extends AbstractExperience {
     private String description;
 
-    public ExperienceWork(LocalDate startDate, LocalDate endDate, String title, String titleLink, String objective, String description) {
+    public ExperienceWork(YearMonth startDate, YearMonth endDate, String title, String titleLink, String objective, String description) {
         super(startDate, endDate, title, titleLink, objective);
         this.description = description;
     }
@@ -28,10 +28,10 @@ public class ExperienceWork extends AbstractExperience {
     @Override
     public String toString() {
         return "title= " + title +
+                ", titleLink= " + link +
                 ", startDate= " + startDate +
                 ", endDate= " + endDate +
-                ", titleLink= " + titleLink +
                 ", objective= " + objective +
-                ", description= " + description;
+                ", description= " + description + "\n";
     }
 }

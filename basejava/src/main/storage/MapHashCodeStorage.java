@@ -1,7 +1,5 @@
 package main.storage;
 
-import main.exception.ExistStorageException;
-import main.exception.NotExistStorageException;
 import main.model.Resume;
 
 import java.util.ArrayList;
@@ -9,21 +7,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapHashCodeStorage extends AbstractStorage {
+public class MapHashCodeStorage extends AbstractStorage<Integer> {
     private Map<Integer, Resume> map = new HashMap<>();
 
     @Override
-    protected int getIndex(String uuid) {
-        return 0;
+    protected Integer getSearchKey(String uuid) {
+        if (map.get(uuid.hashCode()) != null)
+            return  uuid.hashCode();
+        return null;
     }
 
     @Override
-    public void update(Resume resume) {
-        if (!map.containsKey(resume.getUuid().hashCode())) {
-            throw new NotExistStorageException(resume.getUuid());
-        } else {
-            map.replace(resume.getUuid().hashCode(), resume);
-        }
+    protected boolean isExist(Integer index) {
+        return index != null;
+    }
+
+    @Override
+    public void doUpdate(Resume resume, Integer index) {
+        map.replace(resume.getUuid().hashCode(), resume);
     }
 
     @Override
@@ -37,31 +38,22 @@ public class MapHashCodeStorage extends AbstractStorage {
     }
 
     @Override
-    public void save(Resume resume) {
-        if (map.containsKey(resume.getUuid().hashCode())) {
-            throw new ExistStorageException(resume.getUuid());
-        }
+    public void doSave(Resume resume, Integer index) {
         map.put(resume.getUuid().hashCode(), resume);
     }
 
     @Override
-    public Resume get(String uuid) {
-        if (!map.containsKey(uuid.hashCode())) {
-            throw new NotExistStorageException(uuid);
-        }
-        return map.get(uuid.hashCode());
+    public Resume doGet(Integer index) {
+        return map.get(index.hashCode());
     }
 
     @Override
-    public void delete(String uuid) {
-        if (!map.containsKey(uuid.hashCode())) {
-            throw new NotExistStorageException(uuid);
-        }
-        map.remove(uuid.hashCode());
+    public void doDelete(Integer index) {
+        map.remove(index.hashCode());
     }
 
     @Override
-    public List<Resume> copyAll() {
+    public List<Resume> doCopyAll() {
         return new ArrayList<>(map.values());
     }
 }

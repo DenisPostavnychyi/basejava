@@ -1,33 +1,64 @@
 package main.storage;
 
+import main.exception.ExistStorageException;
+import main.exception.NotExistStorageException;
 import main.model.Resume;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class AbstractStorage implements Storage {
+public abstract class AbstractStorage<SK> implements Storage {
 
-    protected abstract int getIndex(String uuid);
+    protected abstract SK getSearchKey(String uuid);
 
-    @Override
-    public abstract void update(Resume resume);
+    protected abstract void doUpdate(Resume resume, SK searchKey);
 
-    @Override
-    public abstract void clear();
+    protected abstract void doSave(Resume resume, SK searchKey);
 
-    @Override
-    public abstract int size();
+    protected abstract Resume doGet(SK searchKey);
 
-    @Override
-    public abstract void save(Resume resume);
+    protected abstract void doDelete(SK searchKey);
 
-    @Override
-    public abstract Resume get(String uuid);
+    protected abstract List<Resume> doCopyAll();
 
-    public abstract void delete(String uuid);
+    protected abstract boolean isExist(SK searchKey);
 
-    public abstract List<Resume> copyAll();
+    public void update(Resume resume) {
+        SK searchKey = getExistedSearchKey(resume.getUuid());
+        doUpdate(resume, searchKey);
+    }
+
+    public void save(Resume resume) {
+        SK searchKey = getNotExistedSearchKey(resume.getUuid());
+        doSave(resume, searchKey);
+    }
+
+    public void delete(String uuid) {
+        SK searchKey = getExistedSearchKey(uuid);
+        doDelete(searchKey);
+    }
+
+    public Resume get(String uuid) {
+        SK searchKey = getExistedSearchKey(uuid);
+        return doGet(searchKey);
+    }
+
+    private SK getExistedSearchKey(String uuid) {
+        SK searchKey = getSearchKey(uuid);
+        if (!isExist(searchKey)) {
+            throw new NotExistStorageException(uuid);
+        }
+        return searchKey;
+    }
+
+    private SK getNotExistedSearchKey(String uuid) {
+        SK searchKey = getSearchKey(uuid);
+        if (isExist(searchKey)) {
+            throw new ExistStorageException(uuid);
+        }
+        return searchKey;
+    }
 
     private Comparator<Resume> resume_FullName_Uuid_Comparator
             = Comparator.comparing(Resume::getFullName)
@@ -35,7 +66,7 @@ public abstract class AbstractStorage implements Storage {
 
     @Override
     public List<Resume> getAllSorted() {
-        List<Resume> list = copyAll();
+        List<Resume> list = doCopyAll();
         Collections.sort(list, resume_FullName_Uuid_Comparator);
         return list;
     }

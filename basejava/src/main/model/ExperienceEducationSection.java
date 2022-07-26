@@ -1,9 +1,10 @@
 package main.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class ExperienceEducationSection implements Section {
+public class ExperienceEducationSection implements Section, Serializable {
     public List<ExperienceEducation> experienceEducations;
 
     public ExperienceEducationSection(List<ExperienceEducation> experienceEducations){

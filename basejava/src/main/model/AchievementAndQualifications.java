@@ -1,12 +1,13 @@
 package main.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class ListSection implements Section{
+public class AchievementAndQualifications implements Section, Serializable {
     private List<String> elements;
 
-    public ListSection(List<String> elements) {
+    public AchievementAndQualifications(List<String> elements) {
         this.elements = Objects.requireNonNull(elements, "elements must not be null");
     }
 
@@ -19,7 +20,7 @@ public class ListSection implements Section{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ListSection that = (ListSection) o;
+        AchievementAndQualifications that = (AchievementAndQualifications) o;
 
         return elements.equals(that.elements);
     }

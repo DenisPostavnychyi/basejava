@@ -1,11 +1,12 @@
 package main.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class TextSection implements Section{
+public class PersonalAndObjective implements Section, Serializable {
     private String description;
 
-    public TextSection(String description) {
+    public PersonalAndObjective(String description) {
         this.description = Objects.requireNonNull(description, "description must not be null");
     }
 
@@ -18,7 +19,7 @@ public class TextSection implements Section{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TextSection that = (TextSection) o;
+        PersonalAndObjective that = (PersonalAndObjective) o;
 
         return description.equals(that.description);
     }

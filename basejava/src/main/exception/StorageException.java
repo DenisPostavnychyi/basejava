@@ -12,4 +12,7 @@ public class StorageException extends RuntimeException{
 
     public StorageException(String message, String name) {
     }
+
+    public StorageException(String message, IOException e) {
+    }
 }

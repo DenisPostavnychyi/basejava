@@ -11,7 +11,14 @@ import static main.model.SectionType.*;
 
 public class ResumeTestData {
     public static void main(String[] args) {
-        Resume resume = new Resume("uuid1", "Григорий Кислин");
+        Resume resume = create("uuid1", "Григорий Кислин");
+
+        ResumePrint resumePrint = new ResumePrint();
+        resumePrint.print(resume);
+    }
+
+    public static Resume create(String uuid, String name) {
+        Resume resume = new Resume(uuid, name);
 
         Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
         Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
@@ -27,10 +34,10 @@ public class ResumeTestData {
         resume.setContacts(contacts);
 
 
-        sections.put(OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
-        sections.put(PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
+        sections.put(OBJECTIVE, new PersonalAndObjective("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям"));
+        sections.put(PERSONAL, new PersonalAndObjective("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
 
-        sections.put(ACHIEVEMENT, new ListSection(convertToList("Организация команды и успешная реализация Java проектов для сторонних заказчиков: приложения автопарк на стеке Spring Cloud/микросервисы, система мониторинга показателей спортсменов на Spring Boot, участие в проекте МЭШ на Play-2, многомодульный Spring Boot + Vaadin проект для комплексных DIY смет\n" +
+        sections.put(ACHIEVEMENT, new AchievementAndQualifications(convertToList("Организация команды и успешная реализация Java проектов для сторонних заказчиков: приложения автопарк на стеке Spring Cloud/микросервисы, система мониторинга показателей спортсменов на Spring Boot, участие в проекте МЭШ на Play-2, многомодульный Spring Boot + Vaadin проект для комплексных DIY смет\n" +
                 "С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". Организация онлайн стажировок и ведение проектов. Более 3500 выпускников.\n" +
                 "Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike. Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.\n" +
                 "Налаживание процесса разработки и непрерывной интеграции ERP системы River BPM. Интеграция с 1С, Bonita BPM, CMIS, LDAP. Разработка приложения управления окружением на стеке: Scala/Play/Anorm/JQuery. Разработка SSO аутентификации и авторизации различных ERP модулей, интеграция CIFS/SMB java сервера.\n" +
@@ -38,7 +45,7 @@ public class ResumeTestData {
                 "Создание JavaEE фреймворка для отказоустойчивого взаимодействия слабо-связанных сервисов (SOA-base архитектура, JAX-WS, JMS, AS Glassfish). Сбор статистики сервисов и информации о состоянии через систему мониторинга Nagios. Реализация онлайн клиента для администрирования и мониторинга системы по JMX (Jython/ Django).\n" +
                 "Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat, Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.")));
 
-        sections.put(QUALIFICATIONS, new ListSection(convertToList("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2\n" +
+        sections.put(QUALIFICATIONS, new AchievementAndQualifications(convertToList("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2\n" +
                 "Version control: Subversion, Git, Mercury, ClearCase, Perforce\n" +
                 "DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle, MySQL, SQLite, MS SQL, HSQLDB\n" +
                 "Languages: Java, Scala, Python/Jython/PL-Python, JavaScript, Groovy\n" +
@@ -59,8 +66,7 @@ public class ResumeTestData {
 
         resume.setSections(sections);
 
-        ResumePrint resumePrint = new ResumePrint();
-        resumePrint.print(resume);
+        return resume;
     }
 
     private static List<ExperienceEducation> createExperienceEducation() {
@@ -108,7 +114,6 @@ public class ResumeTestData {
 
         return removeRepeatsWork(experienceWork);
     }
-
     private static List<ExperienceWork> removeRepeatsWork(List<ExperienceWork> experienceWork) {
 
         for (int i = 0; i < experienceWork.size(); i++) {
@@ -125,10 +130,12 @@ public class ResumeTestData {
         }
         return experienceWork;
     }
+
     private static List<String> convertToList(String info) {
         String[] strings = info.split("\n");
         List<String> list = new ArrayList<>();
         Collections.addAll(list, strings);
         return list;
     }
+
 }

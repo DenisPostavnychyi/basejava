@@ -1,10 +1,11 @@
 package main.service;
 
 import main.model.ContactType;
+import main.model.Resume;
 import main.model.SectionType;
 
 public class ResumePrint {
-    public void print(main.model.Resume resume) {
+    public void print(Resume resume) {
         System.out.println("Uuid: " + resume.getUuid());
         System.out.println("Full name: " + resume.getFullName());
 

@@ -1,10 +1,10 @@
 package main.model;
 
 public enum SectionType {
-    PERSONAL("Особисті якості"), // TextSection
-    OBJECTIVE("Позиція"), // TextSection
-    ACHIEVEMENT("Досягнення"), // ListSection
-    QUALIFICATIONS("Кваліфікація"), // ListSection
+    PERSONAL("Особисті якості"), // PersonalAndObjective
+    OBJECTIVE("Позиція"), // PersonalAndObjective
+    ACHIEVEMENT("Досягнення"), // AchievementAndQualifications
+    QUALIFICATIONS("Кваліфікація"), // AchievementAndQualifications
     EXPERIENCE("Досвід роботи"), // ExperienceWorkSection
     EDUCATION("Освіта"); // ExperienceEducationSection
 

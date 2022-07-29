@@ -1,16 +1,24 @@
 package main.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
-    private final String uuid;
+    private String uuid;
     private String fullName;
 
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
+
+    public Resume() {
+    }
 
     public Resume(String uuid) {
         this.uuid = uuid;
@@ -33,21 +41,38 @@ public class Resume implements Comparable<Resume>, Serializable {
         return fullName;
     }
 
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
+    public Map<ContactType, String> getContacts(){
+        return contacts;
+    }
+
     public void setContacts(Map<ContactType, String> contacts) {
         this.contacts = contacts;
     }
 
-    public String getContacts(ContactType contactType){
-        return contacts.get(contactType);
+    public Map<SectionType, Section> getSections() {
+        return sections;
     }
 
     public void setSections(Map<SectionType, Section> sections) {
         this.sections = sections;
     }
 
-    public Section getSections(SectionType sectionType){
+    public Section getSection(SectionType sectionType){
         return sections.get(sectionType);
     }
+
+    public void addContact(ContactType type, String value) {
+        contacts.put(type, value);
+    }
+
+    public void addSection(SectionType type, Section section) {
+        sections.put(type, section);
+    }
+
 
     @Override
     public boolean equals(Object o) {

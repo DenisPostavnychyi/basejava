@@ -6,6 +6,8 @@ public class OrganizationName implements Serializable {
     public String title;
     public String link;
 
+    public OrganizationName(){}
+
     public OrganizationName(String title, String link) {
         this.title = title;
         this.link = link;

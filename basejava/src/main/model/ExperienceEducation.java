@@ -1,8 +1,15 @@
 package main.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.time.YearMonth;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ExperienceEducation extends AbstractExperience {
+
+    public ExperienceEducation(){
+        super();
+    }
 
     public ExperienceEducation(YearMonth startDate, YearMonth endDate, String title, String titleLink, String objective) {
         super(startDate, endDate, title, titleLink, objective);

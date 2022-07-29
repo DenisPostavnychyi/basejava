@@ -2,8 +2,9 @@ package main.exception;
 
 import java.io.IOException;
 
-public class StorageException extends RuntimeException{
-    public StorageException(String message){
+public class StorageException extends RuntimeException {
+
+    public StorageException(String message) {
         super(message);
     }
 
@@ -14,5 +15,8 @@ public class StorageException extends RuntimeException{
     }
 
     public StorageException(String message, IOException e) {
+    }
+
+    public StorageException(String message, ClassNotFoundException e) {
     }
 }

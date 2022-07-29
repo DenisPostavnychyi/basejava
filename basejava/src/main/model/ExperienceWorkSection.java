@@ -1,11 +1,16 @@
 package main.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class ExperienceWorkSection implements Section, Serializable {
-    public List<ExperienceWork> experienceWorks;
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ExperienceWorkSection extends Section implements Serializable {
+    private List<ExperienceWork> experienceWorks;
+
+    public ExperienceWorkSection(){}
 
     public ExperienceWorkSection(List<ExperienceWork> experienceWorks){
         this.experienceWorks = Objects.requireNonNull(experienceWorks, "experienceWorks must not be null");

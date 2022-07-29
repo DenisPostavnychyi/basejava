@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class AchievementAndQualifications implements Section, Serializable {
+public class AchievementAndQualifications extends Section implements Serializable {
     private List<String> elements;
+
+    public AchievementAndQualifications(){}
 
     public AchievementAndQualifications(List<String> elements) {
         this.elements = Objects.requireNonNull(elements, "elements must not be null");

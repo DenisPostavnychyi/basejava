@@ -3,6 +3,7 @@ package main.service;
 import main.storage.FileStorage;
 import main.storage.PathStorage;
 import main.storage.Storage;
+import main.storage.serializer.ObjectStreamSerializer;
 
 import java.io.File;
 import java.util.Scanner;
@@ -31,7 +32,7 @@ public class ChoosingResumeSaveType {
                 storage = new FileStorage(new File(directory));
                 break;
             case 2:
-                storage = new PathStorage(directory);
+                storage = new PathStorage(directory, new ObjectStreamSerializer());
                 break;
         }
     }

@@ -1,13 +1,28 @@
 package main.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.time.YearMonth;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ExperienceWork extends AbstractExperience {
-    private String description;
+    protected String description;
+
+    public ExperienceWork(){
+        super();
+    }
 
     public ExperienceWork(YearMonth startDate, YearMonth endDate, String title, String titleLink, String objective, String description) {
         super(startDate, endDate, title, titleLink, objective);
         this.description = description;
+    }
+
+    public ExperienceWork(YearMonth startDate, YearMonth endDate, String title, String link, String objective) {
+        super(startDate, endDate, title, link, objective);
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

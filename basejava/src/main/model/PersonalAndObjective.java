@@ -3,8 +3,10 @@ package main.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonalAndObjective implements Section, Serializable {
+public class PersonalAndObjective extends Section implements Serializable {
     private String description;
+
+    public PersonalAndObjective(){}
 
     public PersonalAndObjective(String description) {
         this.description = Objects.requireNonNull(description, "description must not be null");

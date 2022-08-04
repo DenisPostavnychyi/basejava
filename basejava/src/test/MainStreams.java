@@ -6,17 +6,6 @@ import java.util.stream.Collectors;
 
 public class MainStreams {
     public static void main(String[] args) {
-        /*Scanner in = new Scanner(System.in);
-        System.out.println("Enter array length");
-        int[] numbers = new int[in.nextInt()];
-        System.out.println("Enter numbers");
-        String strNums = in.nextLine();
-        String[] nums = strNums.trim().split(" ");
-        for (int i = 0; i < numbers.length; i++)
-        {
-            numbers[i] = Integer.parseInt(nums[i]);
-            System.out.println(numbers[i]);
-        }*/
 
         int[] values1 = new int[]{3, 3, 2, 3, 1, 2};
         int[] values2 = new int[]{9, 8};
@@ -24,6 +13,7 @@ public class MainStreams {
         List<Integer> integers1 = Arrays.asList(1, 2, 3, 4, 5, 6);
         List<Integer> integers2 = Arrays.asList(2, 3, 4, 5, 6);
 
+        System.out.println("Print minValues from arrays");
         System.out.println(minValue(values1));
         System.out.println(minValue(values2));
 
@@ -46,7 +36,7 @@ public class MainStreams {
     private static List<Integer> oddOrEven(List<Integer> integers) {
         return integers.stream()
                 .filter(integers.stream().mapToInt(Integer::intValue)
-                        .sum() % 2 != 0 ? n -> n % 2 == 0 : n -> n % 2 != 0)
+                        .sum() % 2 != 0 ? x -> x % 2 == 0 : x -> x % 2 != 0)
                 .collect(Collectors.toList());
     }
 

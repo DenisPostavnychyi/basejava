@@ -1,6 +1,5 @@
 package test.unit;
 
-
 import main.Config;
 import main.exception.ExistStorageException;
 import main.exception.NotExistStorageException;
@@ -19,12 +18,18 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public abstract class AbstractStorageTest {
-    //protected static final File STORAGE_DIR = new File("D:\\Java Learning\\base\\basejava\\basejava\\Storage");
+public class SqlStorageTest  {
+
+//    protected static final File STORAGE_DIR = Config.get().getStorageDir();
     protected static final File STORAGE_DIR = Config.get().getStorageDir();
 
-    private Storage storage;
+    private Storage storage = Config.get().getStorage();
 
+
+  /*  public SqlStorageTest() {
+        this.storage = new SqlStorage("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+    }
+*/
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
@@ -42,9 +47,6 @@ public abstract class AbstractStorageTest {
         RESUME_4 = ResumeTestData.create(UUID_4, "Name4");
     }
 
-    protected AbstractStorageTest(Storage storage) {
-        this.storage = storage;
-    }
 
     @Before
     public void setUp() throws Exception {

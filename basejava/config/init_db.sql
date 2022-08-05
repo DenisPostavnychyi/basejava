@@ -1,6 +1,6 @@
 CREATE TABLE resume (
-                        uuid      CHAR(36) PRIMARY KEY NOT NULL,
-                        full_name TEXT                 NOT NULL
+                        uuid      varchar (256) PRIMARY KEY NOT NULL,
+                        full_name varchar (256)                 NOT NULL
 );
 
 CREATE TABLE contact (

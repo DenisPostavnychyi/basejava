@@ -14,6 +14,7 @@ import org.junit.runners.Suite;
                 MapHashCodeStorageTest.class,
                 PathStorageTest.class,
                 SortedArrayStorageTest.class,
+                SqlStorageTest.class,
                 XmlPathStorageTest.class,
         })
 public class AllStorageTest {

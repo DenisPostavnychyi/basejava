@@ -1,6 +1,7 @@
 package main.exception;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class StorageException extends RuntimeException {
 
@@ -18,5 +19,8 @@ public class StorageException extends RuntimeException {
     }
 
     public StorageException(String message, ClassNotFoundException e) {
+    }
+
+    public StorageException(SQLException e) {
     }
 }

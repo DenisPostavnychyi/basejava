@@ -1,6 +1,7 @@
 package main.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,6 +9,10 @@ public class AchievementAndQualifications extends Section implements Serializabl
     private List<String> elements;
 
     public AchievementAndQualifications(){}
+
+    public AchievementAndQualifications(String... elements) {
+        this(Arrays.asList(elements));
+    }
 
     public AchievementAndQualifications(List<String> elements) {
         this.elements = Objects.requireNonNull(elements, "elements must not be null");

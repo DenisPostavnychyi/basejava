@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resume>
+    <uuid>23d0ed27-a9a5-4709-987a-c36a833fd15e</uuid>
+    <fullName>Name1</fullName>
+    <contacts>
+        <entry>
+            <key>MOBILE_PHONE</key>
+            <value>11111</value>
+        </entry>
+        <entry>
+            <key>MAIL</key>
+            <value>mail1@ya.ru</value>
+        </entry>
+    </contacts>
+    <sections>
+        <entry>
+            <key>PERSONAL</key>
+            <value xsi:type="personalAndObjective" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <description>Personal data</description>
+            </value>
+        </entry>
+        <entry>
+            <key>OBJECTIVE</key>
+            <value xsi:type="personalAndObjective" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <description>Objective1</description>
+            </value>
+        </entry>
+        <entry>
+            <key>ACHIEVEMENT</key>
+            <value xsi:type="achievementAndQualifications" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <elements>Achivment11</elements>
+                <elements>Achivment12</elements>
+                <elements>Achivment13</elements>
+            </value>
+        </entry>
+        <entry>
+            <key>QUALIFICATIONS</key>
+            <value xsi:type="achievementAndQualifications" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <elements>Java</elements>
+                <elements>SQL</elements>
+                <elements>JavaScript</elements>
+            </value>
+        </entry>
+        <entry>
+            <key>EXPERIENCE</key>
+            <value xsi:type="experienceWorkSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <experienceWorks>
+                    <title>Work2</title>
+                    <link>http://Work2.ru</link>
+                    <description>description2</description>
+                </experienceWorks>
+            </value>
+        </entry>
+        <entry>
+            <key>EDUCATION</key>
+            <value xsi:type="experienceEducationSection" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <experienceEducations>
+                    <title>Edu1</title>
+                    <link>http://Edu1.ru</link>
+                </experienceEducations>
+            </value>
+        </entry>
+    </sections>
+</resume>

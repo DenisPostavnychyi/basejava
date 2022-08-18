@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class AchievementAndQualifications extends Section implements Serializable {
+
+    public static final AchievementAndQualifications EMPTY = new AchievementAndQualifications("");
+
     private List<String> elements;
 
     public AchievementAndQualifications(){}

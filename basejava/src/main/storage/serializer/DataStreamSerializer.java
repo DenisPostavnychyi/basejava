@@ -76,7 +76,7 @@ public class DataStreamSerializer implements StreamSerializer {
 
             int size = dis.readInt();
             for (int i = 0; i < size; i++) {
-                resume.addContact(ContactType.valueOf(dis.readUTF()), dis.readUTF());
+                resume.setContact(ContactType.valueOf(dis.readUTF()), dis.readUTF());
             }
 
             // TODO implements sections
@@ -87,7 +87,7 @@ public class DataStreamSerializer implements StreamSerializer {
                 switch (sectionType) {
                     case PERSONAL:
                     case OBJECTIVE:
-                        resume.addSection(sectionType, new PersonalAndObjective(dis.readUTF()));
+                        resume.setSection(sectionType, new PersonalAndObjective(dis.readUTF()));
                         break;
                     case ACHIEVEMENT:
                     case QUALIFICATIONS:
@@ -98,7 +98,7 @@ public class DataStreamSerializer implements StreamSerializer {
                             stringList.add(dis.readUTF());
                         }
 
-                        resume.addSection(sectionType, new AchievementAndQualifications(stringList));
+                        resume.setSection(sectionType, new AchievementAndQualifications(stringList));
                         break;
                     case EXPERIENCE:
                         sizeList = dis.readInt();
@@ -108,7 +108,7 @@ public class DataStreamSerializer implements StreamSerializer {
                             listWork.add(new ExperienceWork(readDate(dis), readDate(dis), dis.readUTF(), dis.readUTF(), dis.readUTF(), dis.readUTF()));
                         }
 
-                        resume.addSection(sectionType, new ExperienceWorkSection(listWork));
+                        resume.setSection(sectionType, new ExperienceWorkSection(listWork));
                         break;
                     case EDUCATION:
                         sizeList = dis.readInt();
@@ -118,7 +118,7 @@ public class DataStreamSerializer implements StreamSerializer {
                             listEdu.add(new ExperienceEducation(readDate(dis), readDate(dis), dis.readUTF(), dis.readUTF(), dis.readUTF()));
                         }
 
-                        resume.addSection(sectionType, new ExperienceEducationSection(listEdu));
+                        resume.setSection(sectionType, new ExperienceEducationSection(listEdu));
                         break;
                 }
             }

@@ -3,9 +3,12 @@ package main.model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.time.YearMonth;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExperienceEducation extends AbstractExperience {
+
+    public static final ExperienceEducation EMPTY = new ExperienceEducation();
 
     public ExperienceEducation(){
         super();
@@ -13,6 +16,10 @@ public class ExperienceEducation extends AbstractExperience {
 
     public ExperienceEducation(YearMonth startDate, YearMonth endDate, String title, String titleLink, String objective) {
         super(startDate, endDate, title, titleLink, objective);
+    }
+
+    public ExperienceEducation(List<ExperienceEducation> positions) {
+
     }
 
     @Override

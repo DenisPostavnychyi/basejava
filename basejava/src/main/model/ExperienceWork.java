@@ -6,6 +6,9 @@ import java.time.YearMonth;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExperienceWork extends AbstractExperience {
+
+    public static final ExperienceWork EMPTY = new ExperienceWork();
+
     protected String description;
 
     public ExperienceWork(){
@@ -15,10 +18,6 @@ public class ExperienceWork extends AbstractExperience {
     public ExperienceWork(YearMonth startDate, YearMonth endDate, String title, String titleLink, String objective, String description) {
         super(startDate, endDate, title, titleLink, objective);
         this.description = description;
-    }
-
-    public ExperienceWork(YearMonth startDate, YearMonth endDate, String title, String link, String objective) {
-        super(startDate, endDate, title, link, objective);
     }
 
     public String getDescription() {

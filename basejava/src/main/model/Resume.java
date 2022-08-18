@@ -7,10 +7,23 @@ import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
+
+    public static final Resume EMPTY = new Resume();
+
+    static {
+        EMPTY.setSection(SectionType.OBJECTIVE, PersonalAndObjective.EMPTY);
+        EMPTY.setSection(SectionType.PERSONAL, PersonalAndObjective.EMPTY);
+        EMPTY.setSection(SectionType.ACHIEVEMENT, AchievementAndQualifications.EMPTY);
+        EMPTY.setSection(SectionType.QUALIFICATIONS, AchievementAndQualifications.EMPTY);
+        EMPTY.setSection(SectionType.EXPERIENCE, new ExperienceWorkSection(ExperienceWork.EMPTY));
+        EMPTY.setSection(SectionType.EDUCATION, new ExperienceEducationSection(ExperienceEducation.EMPTY));
+    }
+
     private String uuid;
     private String fullName;
 
@@ -20,8 +33,8 @@ public class Resume implements Comparable<Resume>, Serializable {
     public Resume() {
     }
 
-    public Resume(String uuid) {
-        this.uuid = uuid;
+    public Resume(String fullName) {
+        this(UUID.randomUUID().toString(), fullName);
     }
 
     public Resume(String uuid, String fullName) {
@@ -65,11 +78,11 @@ public class Resume implements Comparable<Resume>, Serializable {
         return sections.get(sectionType);
     }
 
-    public void addContact(ContactType type, String value) {
+    public void setContact(ContactType type, String value) {
         contacts.put(type, value);
     }
 
-    public void addSection(SectionType type, Section section) {
+    public void setSection(SectionType type, Section section) {
         sections.put(type, section);
     }
 
@@ -100,4 +113,5 @@ public class Resume implements Comparable<Resume>, Serializable {
         int cmp = fullName.compareTo(o.fullName);
         return cmp != 0 ? cmp : uuid.compareTo(o.uuid);
     }
+
 }

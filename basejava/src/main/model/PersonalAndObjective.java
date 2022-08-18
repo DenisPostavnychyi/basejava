@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class PersonalAndObjective extends Section implements Serializable {
+
+    public static final PersonalAndObjective EMPTY = new PersonalAndObjective("");
+
     private String description;
 
     public PersonalAndObjective(){}
